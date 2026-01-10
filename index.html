@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Application de gestion d'inclinaison des panneaux solaires - Calculez l'angle optimal pour maximiser votre production d'énergie solaire">
+    <title>Solar Panel Manager | Gestion d'Inclinaison</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="background-effects">
+        <div class="sun-glow"></div>
+        <div class="grid-pattern"></div>
+    </div>
+
+    <main class="container">
+        <header class="header">
+            <div class="logo">
+                <div class="sun-icon">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" />
+                        <path
+                            d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <h1>Solar Panel Manager</h1>
+            </div>
+            <p class="subtitle">Optimisez l'inclinaison de vos panneaux solaires</p>
+        </header>
+
+        <div class="card-container">
+            <section class="card location-card">
+                <h2>
+                    <span class="card-icon">📍</span>
+                    Localisation
+                </h2>
+
+                <div class="input-mode-toggle">
+                    <button class="mode-btn active" data-mode="city">Ville</button>
+                    <button class="mode-btn" data-mode="coords">Coordonnées GPS</button>
+                </div>
+
+                <div class="input-section city-input active">
+                    <label for="city-select">Sélectionnez votre ville</label>
+                    <select id="city-select">
+                        <option value="">Choisir une ville...</option>
+                    </select>
+                </div>
+
+                <div class="input-section coords-input">
+                    <div class="coords-grid">
+                        <div class="coord-field">
+                            <label for="latitude">Latitude</label>
+                            <input type="number" id="latitude" placeholder="ex: 48.8566" step="0.0001" min="-90"
+                                max="90">
+                        </div>
+                        <div class="coord-field">
+                            <label for="longitude">Longitude</label>
+                            <input type="number" id="longitude" placeholder="ex: 2.3522" step="0.0001" min="-180"
+                                max="180">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card date-card">
+                <h2>
+                    <span class="card-icon">📅</span>
+                    Date
+                </h2>
+                <label for="date-picker">Sélectionnez la date</label>
+                <input type="date" id="date-picker">
+            </section>
+        </div>
+
+        <button class="calculate-btn" id="calculate-btn">
+            <span class="btn-icon">⚡</span>
+            Calculer l'inclinaison
+        </button>
+
+        <section class="result-card" id="result-card">
+            <div class="result-content">
+                <div class="result-header">
+                    <h2>Inclinaison Recommandée</h2>
+                    <p class="result-location" id="result-location"></p>
+                </div>
+
+                <div class="angle-display">
+                    <div class="angle-value" id="angle-value">--</div>
+                    <div class="angle-unit">degrés</div>
+                </div>
+
+                <div class="angle-visual">
+                    <div class="panel-container">
+                        <div class="panel" id="panel-visual">
+                            <div class="panel-surface"></div>
+                            <div class="sun-rays">
+                                <div class="ray"></div>
+                                <div class="ray"></div>
+                                <div class="ray"></div>
+                            </div>
+                        </div>
+                        <div class="ground"></div>
+                    </div>
+                </div>
+
+                <div class="position-indicators">
+                    <div class="position-dot" data-angle="27">
+                        <span class="dot"></span>
+                        <span class="label">27°</span>
+                    </div>
+                    <div class="position-dot" data-angle="35">
+                        <span class="dot"></span>
+                        <span class="label">35°</span>
+                    </div>
+                    <div class="position-dot" data-angle="42">
+                        <span class="dot"></span>
+                        <span class="label">42°</span>
+                    </div>
+                </div>
+
+                <div class="result-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Angle calculé</span>
+                        <span class="detail-value" id="exact-angle">--°</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Position recommandée</span>
+                        <span class="detail-value" id="recommended-position">--°</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Solar Panel Manager • Optimisez votre énergie solaire</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
