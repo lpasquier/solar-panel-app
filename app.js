@@ -60,6 +60,15 @@ function init() {
     const today = new Date();
     datePicker.value = today.toISOString().split('T')[0];
 
+    // Register Service Worker for PWA
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.log('Service Worker registration failed', err));
+        });
+    }
+
     // Event listeners
     modeBtns.forEach(btn => {
         btn.addEventListener('click', () => switchInputMode(btn.dataset.mode));

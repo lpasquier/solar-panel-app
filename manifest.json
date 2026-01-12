@@ -1,0 +1,17 @@
+{
+  "name": "Solar Panel Manager",
+  "short_name": "SolarManager",
+  "description": "Optimisez l'inclinaison de vos panneaux solaires",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f0f1a",
+  "theme_color": "#f59e0b",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
