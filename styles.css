@@ -634,6 +634,97 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* ==========================================
+   Calendar Card
+   ========================================== */
+.calendar-card {
+    display: none;
+    margin-top: var(--spacing-lg);
+    animation: fadeIn var(--transition-normal);
+}
+
+.calendar-card.active {
+    display: block;
+}
+
+.calendar-intro {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.calendar-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.calendar-item {
+    display: flex;
+    align-items: center;
+    background: var(--color-bg-glass);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm);
+    border: var(--border-glass);
+    transition: transform var(--transition-fast);
+}
+
+.calendar-item:hover {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.calendar-angle-badge {
+    min-width: 50px;
+    height: 50px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    color: white;
+    margin-right: var(--spacing-md);
+}
+
+.badge-val {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.badge-unit {
+    font-size: 0.6rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.calendar-info {
+    flex: 1;
+}
+
+.calendar-dates {
+    display: block;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-size: 0.95rem;
+}
+
+.calendar-season {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}
+
+.calendar-note {
+    margin-top: var(--spacing-md);
+    padding: var(--spacing-sm);
+    background: rgba(245, 158, 11, 0.1);
+    border-radius: var(--radius-md);
+    font-size: 0.8rem;
+    color: var(--color-primary-light);
+    line-height: 1.4;
+}
+
+/* ==========================================
    Responsive
    ========================================== */
 @media (max-width: 480px) {

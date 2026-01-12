@@ -41,6 +41,8 @@ const exactAngle = document.getElementById('exact-angle');
 const recommendedPosition = document.getElementById('recommended-position');
 const resultLocation = document.getElementById('result-location');
 const panelVisual = document.getElementById('panel-visual');
+const calendarCard = document.getElementById('calendar-card');
+const calendarTimeline = document.getElementById('calendar-timeline');
 const modeBtns = document.querySelectorAll('.mode-btn');
 const inputSections = document.querySelectorAll('.input-section');
 
@@ -206,6 +208,80 @@ function calculateInclination() {
 
     // Display results
     displayResults(result, locationName, selectedDate);
+
+    // Calculate seasonal calendar
+    calculateSeasonalCalendar(latitude);
+}
+
+// ==========================================
+// Seasonal Calendar Logic
+// ==========================================
+
+function calculateSeasonalCalendar(latitude) {
+    const year = new Date().getFullYear();
+    const periods = [];
+    let currentPosition = null;
+    let startDate = null;
+
+    // Analyze each day of the year
+    for (let day = 1; day <= 365; day++) {
+        const date = new Date(year, 0, day);
+        const result = calculateOptimalAngle(latitude, date);
+        const position = result.recommendedAngle;
+
+        if (position !== currentPosition) {
+            if (currentPosition !== null) {
+                periods.push({
+                    angle: currentPosition,
+                    start: new Date(startDate),
+                    end: new Date(year, 0, day - 1)
+                });
+            }
+            currentPosition = position;
+            startDate = new Date(date);
+        }
+
+        // Last day
+        if (day === 365) {
+            periods.push({
+                angle: currentPosition,
+                start: new Date(startDate),
+                end: new Date(date)
+            });
+        }
+    }
+
+    // Merge periods if they wrap around New Year (optional, for simplicity we keep them as list)
+    displayCalendar(periods);
+}
+
+function displayCalendar(periods) {
+    calendarCard.classList.add('active');
+    calendarTimeline.innerHTML = '';
+
+    const dateOptions = { day: 'numeric', month: 'long' };
+
+    periods.forEach(period => {
+        const item = document.createElement('div');
+        item.className = 'calendar-item';
+
+        let seasonText = '';
+        if (period.angle === 27) seasonText = 'Optimisation Été';
+        else if (period.angle === 42) seasonText = 'Optimisation Hiver';
+        else seasonText = 'Inter-saisons';
+
+        item.innerHTML = `
+            <div class="calendar-angle-badge">
+                <span class="badge-val">${period.angle}</span>
+                <span class="badge-unit">deg</span>
+            </div>
+            <div class="calendar-info">
+                <span class="calendar-dates">Du ${period.start.toLocaleDateString('fr-FR', dateOptions)} au ${period.end.toLocaleDateString('fr-FR', dateOptions)}</span>
+                <span class="calendar-season">${seasonText}</span>
+            </div>
+        `;
+        calendarTimeline.appendChild(item);
+    });
 }
 
 // ==========================================
